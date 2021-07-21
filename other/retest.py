@@ -1,8 +1,9 @@
 import datetime
+
 import easyocr
 import csv
 
-IMAGE_PATH = './images/invoice.png'
+IMAGE_PATH = '../images/invoice.png'
 
 reader = easyocr.Reader(['en'], gpu=False)
 
@@ -15,7 +16,7 @@ for i in range(len(bound)):
 lower_text = text.lower()
 res = lower_text.split()
 
-# print(res)
+print(res)
 
 # Get total
 total = 0
@@ -37,7 +38,7 @@ def date_validate(date_string):
         return False
 
 
-date = "YYYY-MM-DD"
+date = ""
 for index, i in enumerate(res):
     if date_validate(res[index]):
         print("true")
@@ -48,7 +49,7 @@ data = [
     [total, date]
 ]
 
-with open('outputs.csv', 'w', encoding='UTF8', newline='') as f:
+with open('../outputs.csv', 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(header)
     writer.writerows(data)
